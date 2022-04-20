@@ -12,15 +12,14 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  String select = "";
   FirebaseAuth auth = FirebaseAuth.instance;
   @override
   void initState() {
     super.initState();
-    select = auth.currentUser != null ? "/tabbar" : "/signup";
-    print(auth.currentUser);
     Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, select);
+      print(auth.currentUser);
+      Navigator.pushReplacementNamed(
+          context, auth.currentUser != null ? "/tabbar" : "/signup");
     });
   }
 

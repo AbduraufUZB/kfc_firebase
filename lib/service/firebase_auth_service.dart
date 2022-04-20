@@ -40,7 +40,7 @@ class FirebaseAuthService {
   }
 
   static logAut(BuildContext context) async {
-    await FirebaseAuthService.auth.currentUser!.delete();
+    //await FirebaseAuthService.auth.currentUser!.delete();
     Navigator.pushNamedAndRemoveUntil(context, "/signup", (route) => false);
     context.read<SetStateProvider>().mySetState();
   }

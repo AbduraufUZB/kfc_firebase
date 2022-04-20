@@ -62,13 +62,8 @@ class SignUpSmsPage extends StatelessWidget {
                               ColorConst.kSuccessfulColor);
                           await FirestoreService.writeToDb(username: name);
 
-                          if ("${FireService.auth.currentUser!.phoneNumber}" ==
-                              "+998123456789") {
-                            Navigator.pushNamed(context, "/admin");
-                          } else {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, "/tabbar", (route) => false);
-                          }
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, "/tabbar", (route) => false);
                         } else {
                           MyMessenger.messenger(context, "Error SMS code!",
                               ColorConst.kPrimaryColor);

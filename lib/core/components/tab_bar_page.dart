@@ -4,7 +4,6 @@ import 'package:kfcapp/screens/bag_page.dart';
 import 'package:kfcapp/screens/history_page.dart';
 import 'package:kfcapp/screens/home_page.dart';
 import 'package:kfcapp/screens/profile_page.dart';
-import 'package:kfcapp/service/fire_service.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
@@ -27,10 +26,10 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     return Scaffold(
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          HomePage(),
-          BagPage(),
-          HistoryPage(),
+        children: [
+          const HomePage(),
+          const BagPage(),
+          const HistoryPage(),
           ProfilePage(),
         ],
       ),
