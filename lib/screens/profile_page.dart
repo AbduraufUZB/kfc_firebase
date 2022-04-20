@@ -6,18 +6,24 @@ import 'package:kfcapp/core/constants/font_const.dart';
 import 'package:kfcapp/core/constants/pm_const.dart';
 import 'package:kfcapp/core/constants/radius_const.dart';
 import 'package:kfcapp/core/constants/weight_const.dart';
-import 'package:kfcapp/provider/set_state_provider.dart';
 import 'package:kfcapp/service/fire_service.dart';
 import 'package:kfcapp/service/firebase_auth_service.dart';
 import 'package:kfcapp/service/firestorage_service.dart';
 import 'package:kfcapp/service/firestroe_service.dart';
-import 'package:provider/provider.dart';
 import 'dart:io';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   XFile? image;
+
   final _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +42,8 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        if("${FireService.auth.currentUser!.phoneNumber}" == "+998123456789"){
+                        if ("${FireService.auth.currentUser!.phoneNumber}" ==
+                            "+998123456789") {
                           Navigator.pushNamed(context, "/admin");
                         }
                       },
@@ -62,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                                   builder: (context, setState) {
                                 return Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.2,
+                                      MediaQuery.of(context).size.height * 0.3,
                                   margin: PMConst.kMediumPM,
                                   decoration: BoxDecoration(
                                     color: ColorConst.kButtonColor,
@@ -77,8 +84,7 @@ class ProfilePage extends StatelessWidget {
                                         onPressed: () async {
                                           image = await _picker.pickImage(
                                               source: ImageSource.gallery);
-                                          UserAddImage.addIMGtoDB(image!);
-                                          UserAddImage.writeToDb();
+                                          await UserAddImage.addIMGtoDB(image!);
                                           setState(() {});
                                         },
                                         child: const Text("Upload Image"),
@@ -95,29 +101,21 @@ class ProfilePage extends StatelessWidget {
                                         ),
                                       ),
                                       ElevatedButton(
-                                        onPressed: () {
-                                          UserAddImage.writeToDb();
+                                        onPressed: () async {
+                                          await UserAddImage.writeToDb()
+                                              .then((value) {
+                                            if (value) {
+                                              Navigator.pop(context);
+                                            }
+                                          });
                                         },
                                         child: const Text("Set Image"),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          IconButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              icon: const Icon(
-                                                  Icons.chevron_left_outlined))
-                                        ],
                                       ),
                                     ],
                                   ),
                                 );
                               });
                             });
-                        context.read<SetStateProvider>().mySetState();
                       }),
                       child: myContainer("Upload Image", context),
                     ),

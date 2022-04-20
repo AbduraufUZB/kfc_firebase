@@ -21,7 +21,7 @@ class UserAddImage {
     }
   }
 
-  static Future writeToDb() async {
+  static Future<bool> writeToDb() async {
     try {
       await FireService.store
           .collection('user')
@@ -32,8 +32,10 @@ class UserAddImage {
         },
         SetOptions(merge: true),
       );
+      return true;
     } catch (e) {
       debugPrint('ERROR IS HERE >>>>>> ${e.toString()}');
+      return false;
     }
   }
 }
