@@ -18,7 +18,6 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  MyRoute _myRoute = MyRoute();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: _myRoute.onGenerateRoute,
+      onGenerateRoute: MyRoute.instance.onGenerateRoute,
       initialRoute: "/splash",
     );
   }

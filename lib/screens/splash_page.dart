@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kfcapp/service/firestorage_service.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(Duration(seconds: 3), () {
       print(auth.currentUser);
+      UserAddImage.getList();
       Navigator.pushReplacementNamed(
           context, auth.currentUser != null ? "/tabbar" : "/signup");
     });

@@ -7,12 +7,27 @@ import 'package:kfcapp/service/fire_service.dart';
 
 class UserAddImage {
   static String path = '';
+  static List foods = [];
   static Future addIMGtoDB(XFile image) async {
     try {
       var data = await FireService.storage
           .ref()
           .child('pictures')
           .child('avatars')
+          .child(DateTime.now().microsecond.toString())
+          .putFile(File(image.path));
+      path = await data.ref.getDownloadURL();
+    } catch (e) {
+      debugPrint('STORAGE ERROR >>>> $e');
+    }
+  }
+
+  static Future addIMGtoDBSC(XFile image) async {
+    try {
+      var data = await FireService.storage
+          .ref()
+          .child('pictures')
+          .child('foods')
           .child(DateTime.now().microsecond.toString())
           .putFile(File(image.path));
       path = await data.ref.getDownloadURL();
@@ -37,5 +52,23 @@ class UserAddImage {
       debugPrint('ERROR IS HERE >>>>>> ${e.toString()}');
       return false;
     }
+  }
+
+  static Future<bool> writeToDbSC() async {
+    try {
+      await FireService.store.collection('foods').doc("category").set(
+        {"category": foods},
+        SetOptions(merge: true),
+      );
+      return true;
+    } catch (e) {
+      debugPrint('ERROR IS HERE >>>>>> ${e.toString()}');
+      return false;
+    }
+  }
+
+  static Future getList() async {
+    var data = await FireService.store.doc("/foods/category").get();
+    UserAddImage.foods = data["category"];
   }
 }

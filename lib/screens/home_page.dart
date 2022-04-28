@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:kfcapp/core/constants/color_const.dart';
@@ -5,6 +6,7 @@ import 'package:kfcapp/core/constants/font_const.dart';
 import 'package:kfcapp/core/constants/pm_const.dart';
 import 'package:kfcapp/core/constants/radius_const.dart';
 import 'package:kfcapp/core/constants/weight_const.dart';
+import 'package:kfcapp/widgets/address_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 30),
               const Text(
                 "KFC",
                 style: TextStyle(
@@ -40,7 +43,7 @@ class HomePage extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                     fontSize: FontConst.kMediumFont),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.07),
               Expanded(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.3,
@@ -52,8 +55,7 @@ class HomePage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.circular(RadiusConst.kMediumRadius),
                           image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://source.unsplash.com/random/$index"),
+                              image: CachedNetworkImageProvider("https://source.unsplash.com/random/$index"),
                               fit: BoxFit.cover),
                         ),
                         child: Column(
@@ -94,9 +96,17 @@ class HomePage extends StatelessWidget {
                                       ),
                                     ),
                                     height: MediaQuery.of(context).size.height *
-                                        0.05,
+                                        0.06,
                                     width:
-                                        MediaQuery.of(context).size.width * 0.4,
+                                        MediaQuery.of(context).size.width * 0.3,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: const [
+                                            Icon(Icons.add, color: ColorConst.kButtonColor),
+                                            Text("Add to bag", style: TextStyle(color: ColorConst.kButtonColor, fontSize: FontConst.kMediumFont),)
+                                          ],
+                                        ),
                                   ),
                                 ],
                               ),
@@ -112,37 +122,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(
-                    radius: RadiusConst.kExtraLargeRadius,
-                    backgroundColor: ColorConst.kPrimaryColor.withOpacity(0.9),
-                    child: const Center(
-                        child: Icon(
-                      Icons.pin_drop_outlined,
-                      size: FontConst.kExtraLargeFont,
-                    )),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Your delivery address",
-                          style: TextStyle(color: ColorConst.kPrimaryColor),
-                        ),
-                        Text(
-                          "ADDDDDRESSSSSS",
-                        ),
-                      ],
-                    ),
-                  ),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.edit))
-                ],
-              ),
+              const AddressWidget(),
             ],
           ),
         ),
