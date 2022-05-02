@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:kfcapp/core/components/admin_tab_bar_page.dart';
 import 'package:kfcapp/core/components/tab_bar_page.dart';
-import 'package:kfcapp/screens/admin/admin_add_category_page.dart';
-import 'package:kfcapp/screens/home_page.dart';
+import 'package:kfcapp/screens/admin/update/add_food_page.dart';
+import 'package:kfcapp/screens/admin/update/admin_add_category_page.dart';
+import 'package:kfcapp/screens/admin/update/delete_category_page.dart';
+import 'package:kfcapp/screens/admin/update/delete_food_page.dart';
+import 'package:kfcapp/screens/page_not_found.dart';
+import 'package:kfcapp/screens/user/home/category_page.dart';
+import 'package:kfcapp/screens/user/home/home_page.dart';
 import 'package:kfcapp/screens/sign_up/sign_up_sms_page.dart';
 import 'package:kfcapp/screens/sign_up/signup_page.dart';
 import 'package:kfcapp/screens/splash_page.dart';
 
 class MyRoute {
-
   static final MyRoute _instance = MyRoute._init();
   static MyRoute get instance => _instance;
   MyRoute._init();
@@ -25,14 +29,27 @@ class MyRoute {
         return MaterialPageRoute(builder: (ctx) => SignUpPage());
       case "/admin":
         return MaterialPageRoute(builder: (ctx) => const AdminTabBarPage());
-      // case "/info":
       case "/splash":
         return MaterialPageRoute(builder: (ctx) => const SplashPage());
+      case "/category":
+        return MaterialPageRoute(builder: (ctx) => const CategoryPage());
       case "/sms":
         return MaterialPageRoute(
             builder: (ctx) => SignUpSmsPage(name: args as String));
       case "/add_category":
-        return MaterialPageRoute(builder: ((context) => AdminAddCategoryPage()));
+        return MaterialPageRoute(
+            builder: ((context) => AdminAddCategoryPage()));
+      case "/delete_category":
+        return MaterialPageRoute(
+            builder: ((context) => const DeleteCategoryPage()));
+      case "/add_food":
+        return MaterialPageRoute(builder: ((context) => const AddFoodPage()));
+      case "/delete_food":
+        return MaterialPageRoute(
+            builder: ((context) => const DeleteFoodPage()));
+      default:
+        return MaterialPageRoute(
+            builder: (context) => const PageNotFoundPage());
     }
   }
 }

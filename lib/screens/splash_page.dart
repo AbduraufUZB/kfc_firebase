@@ -19,9 +19,8 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(Duration(seconds: 3), () {
       print(auth.currentUser);
-      UserAddImage.getList();
-      Navigator.pushReplacementNamed(
-          context, auth.currentUser != null ? "/tabbar" : "/signup");
+      UserAddImage.getList().then((value) => Navigator.pushReplacementNamed(
+          context, auth.currentUser != null ? "/tabbar" : "/signup"));
     });
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kfcapp/core/constants/color_const.dart';
-import 'package:kfcapp/screens/admin/admin_home_page.dart';
-import 'package:kfcapp/screens/admin/admin_order_page.dart';
-import 'package:kfcapp/screens/admin/admin_update_page.dart';
+import 'package:kfcapp/screens/admin/home/admin_home_page.dart';
+import 'package:kfcapp/screens/admin/order/admin_order_page.dart';
+import 'package:kfcapp/screens/admin/update/admin_update_page.dart';
 
 class AdminTabBarPage extends StatefulWidget {
   const AdminTabBarPage({Key? key}) : super(key: key);

@@ -6,6 +6,7 @@ import 'package:kfcapp/core/constants/font_const.dart';
 import 'package:kfcapp/core/constants/pm_const.dart';
 import 'package:kfcapp/core/constants/radius_const.dart';
 import 'package:kfcapp/core/constants/weight_const.dart';
+import 'package:kfcapp/service/firestorage_service.dart';
 import 'package:kfcapp/widgets/address_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -55,7 +56,8 @@ class HomePage extends StatelessWidget {
                           borderRadius:
                               BorderRadius.circular(RadiusConst.kMediumRadius),
                           image: DecorationImage(
-                              image: CachedNetworkImageProvider("https://source.unsplash.com/random/$index"),
+                              image: CachedNetworkImageProvider(
+                                  UserAddImage.foods[index]["category_photo"]),
                               fit: BoxFit.cover),
                         ),
                         child: Column(
@@ -63,18 +65,19 @@ class HomePage extends StatelessWidget {
                           children: [
                             const SizedBox(height: 25),
                             Container(
-                              width: MediaQuery.of(context).size.width * 0.25,
-                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.06,
                               decoration: BoxDecoration(
-                                  color: ColorConst.kPrimaryColor,
+                                  color:
+                                      ColorConst.kPrimaryColor.withOpacity(0.7),
                                   borderRadius: BorderRadius.circular(
                                       RadiusConst.kMediumRadius)),
-                              child: const Center(
+                              child: Center(
                                   child: Text(
-                                "Price",
-                                style: TextStyle(
+                                UserAddImage.foods[index]["category_name"],
+                                style: const TextStyle(
                                     color: ColorConst.kButtonColor,
-                                    fontWeight: WeightConst.kMediumFont,
+                                    fontWeight: WeightConst.kLargeFont,
                                     fontSize: FontConst.kMediumFont),
                               )),
                             ),
@@ -83,30 +86,45 @@ class HomePage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                      color: ColorConst.kPrimaryColor,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(
-                                          RadiusConst.kMediumRadius,
-                                        ),
-                                        bottomRight: Radius.circular(
-                                          RadiusConst.kMediumRadius,
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, "/category");
+                                    },
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        color: ColorConst.kPrimaryColor,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(
+                                            RadiusConst.kMediumRadius,
+                                          ),
+                                          bottomRight: Radius.circular(
+                                            RadiusConst.kMediumRadius,
+                                          ),
                                         ),
                                       ),
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.06,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: const [
+                                          Icon(Icons.add,
+                                              color: ColorConst.kButtonColor),
+                                          Text(
+                                            "Add to bag",
+                                            style: TextStyle(
+                                                color: ColorConst.kButtonColor,
+                                                fontSize:
+                                                    FontConst.kMediumFont),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                    height: MediaQuery.of(context).size.height *
-                                        0.06,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.3,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: const [
-                                            Icon(Icons.add, color: ColorConst.kButtonColor),
-                                            Text("Add to bag", style: TextStyle(color: ColorConst.kButtonColor, fontSize: FontConst.kMediumFont),)
-                                          ],
-                                        ),
                                   ),
                                 ],
                               ),
@@ -116,7 +134,7 @@ class HomePage extends StatelessWidget {
                       );
                     },
                     autoplay: true,
-                    itemCount: 3,
+                    itemCount: UserAddImage.foods.length,
                     pagination: const SwiperPagination(),
                   ),
                 ),

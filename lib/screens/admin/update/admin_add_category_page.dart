@@ -6,7 +6,6 @@ import 'package:kfcapp/core/constants/color_const.dart';
 import 'package:kfcapp/core/constants/font_const.dart';
 import 'package:kfcapp/core/constants/pm_const.dart';
 import 'package:kfcapp/core/constants/radius_const.dart';
-import 'package:kfcapp/core/constants/weight_const.dart';
 import 'package:kfcapp/service/firestorage_service.dart';
 import 'package:kfcapp/widgets/my_messenger.dart';
 import 'package:kfcapp/widgets/showalertdialog_widget.dart';

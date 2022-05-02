@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kfcapp/core/constants/color_const.dart';
-import 'package:kfcapp/screens/bag_page.dart';
-import 'package:kfcapp/screens/history_page.dart';
-import 'package:kfcapp/screens/home_page.dart';
-import 'package:kfcapp/screens/profile_page.dart';
+import 'package:kfcapp/screens/user/bag/bag_page.dart';
+import 'package:kfcapp/screens/user/history/history_page.dart';
+import 'package:kfcapp/screens/user/home/home_page.dart';
+import 'package:kfcapp/screens/user/profile/profile_page.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
