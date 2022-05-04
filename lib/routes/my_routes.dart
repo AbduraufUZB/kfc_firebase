@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kfcapp/core/components/admin_tab_bar_page.dart';
 import 'package:kfcapp/core/components/tab_bar_page.dart';
-import 'package:kfcapp/screens/admin/update/add_food_page.dart';
-import 'package:kfcapp/screens/admin/update/admin_add_category_page.dart';
-import 'package:kfcapp/screens/admin/update/delete_category_page.dart';
-import 'package:kfcapp/screens/admin/update/delete_food_page.dart';
+import 'package:kfcapp/screens/admin/update/add_food/add_food_page.dart';
+import 'package:kfcapp/screens/admin/update/add_category/admin_add_category_page.dart';
+import 'package:kfcapp/screens/admin/update/add_food/add_food_second_page.dart';
+import 'package:kfcapp/screens/admin/update/delete_category/delete_category_page.dart';
+import 'package:kfcapp/screens/admin/update/delete_food/delete_food_page.dart';
 import 'package:kfcapp/screens/page_not_found.dart';
 import 'package:kfcapp/screens/user/home/category_page.dart';
 import 'package:kfcapp/screens/user/home/home_page.dart';
@@ -47,6 +48,9 @@ class MyRoute {
       case "/delete_food":
         return MaterialPageRoute(
             builder: ((context) => const DeleteFoodPage()));
+      case "/add_food_sc":
+        return MaterialPageRoute(
+            builder: ((context) => AddFoodScPage(index_current: args as int,)));
       default:
         return MaterialPageRoute(
             builder: (context) => const PageNotFoundPage());

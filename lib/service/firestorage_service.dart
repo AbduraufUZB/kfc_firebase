@@ -8,6 +8,8 @@ import 'package:kfcapp/service/fire_service.dart';
 class UserAddImage {
   static String path = '';
   static List foods = [];
+
+  // Rasmni Firebasega yuklab berish
   static Future addIMGtoDB(XFile image) async {
     try {
       var data = await FireService.storage
@@ -36,6 +38,7 @@ class UserAddImage {
     }
   }
 
+  //Rasmni firebasega linki bilan saqlash
   static Future<bool> writeToDb() async {
     try {
       await FireService.store
@@ -67,6 +70,7 @@ class UserAddImage {
     }
   }
 
+  //Listga firebasedan kelayotgan listni tenglashtirish
   static Future getList() async {
     var data = await FireService.store.doc("/foods/category").get();
     UserAddImage.foods = data["category"];
