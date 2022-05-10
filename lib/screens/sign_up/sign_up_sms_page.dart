@@ -5,7 +5,6 @@ import 'package:kfcapp/core/constants/pm_const.dart';
 import 'package:kfcapp/core/constants/radius_const.dart';
 import 'package:kfcapp/core/constants/weight_const.dart';
 import 'package:kfcapp/provider/set_state_provider.dart';
-import 'package:kfcapp/service/fire_service.dart';
 import 'package:kfcapp/service/firebase_auth_service.dart';
 import 'package:kfcapp/service/firestroe_service.dart';
 import 'package:kfcapp/widgets/my_messenger.dart';
@@ -61,7 +60,6 @@ class SignUpSmsPage extends StatelessWidget {
                               "Sign up is SUCCESSFUL",
                               ColorConst.kSuccessfulColor);
                           await FirestoreService.writeToDb(username: name);
-
                           Navigator.pushNamedAndRemoveUntil(
                               context, "/tabbar", (route) => false);
                         } else {

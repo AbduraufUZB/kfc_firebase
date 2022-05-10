@@ -99,7 +99,10 @@ class HomePage extends StatelessWidget {
                                         InkWell(
                                           onTap: () {
                                             Navigator.pushNamed(
-                                                context, "/category");
+                                              context,
+                                              "/category",
+                                              arguments: index
+                                            );
                                           },
                                           child: Container(
                                             decoration: const BoxDecoration(

@@ -7,9 +7,14 @@ import 'package:kfcapp/provider/remove_category_provider.dart';
 import 'package:kfcapp/service/firestorage_service.dart';
 import 'package:provider/provider.dart';
 
-class DeleteCategoryPage extends StatelessWidget {
+class DeleteCategoryPage extends StatefulWidget {
   const DeleteCategoryPage({Key? key}) : super(key: key);
 
+  @override
+  State<DeleteCategoryPage> createState() => _DeleteCategoryPageState();
+}
+
+class _DeleteCategoryPageState extends State<DeleteCategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

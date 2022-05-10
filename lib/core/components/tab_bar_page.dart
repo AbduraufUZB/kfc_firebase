@@ -4,6 +4,7 @@ import 'package:kfcapp/screens/user/bag/bag_page.dart';
 import 'package:kfcapp/screens/user/history/history_page.dart';
 import 'package:kfcapp/screens/user/home/home_page.dart';
 import 'package:kfcapp/screens/user/profile/profile_page.dart';
+import 'package:kfcapp/service/user_bag_service.dart';
 
 class TabBarPage extends StatefulWidget {
   const TabBarPage({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    UserBagService.writeToList();
     _tabController = TabController(length: 4, vsync: this);
   }
 

@@ -5,15 +5,16 @@ import 'package:kfcapp/core/constants/pm_const.dart';
 import 'package:kfcapp/core/constants/radius_const.dart';
 import 'package:kfcapp/service/firestorage_service.dart';
 
-class DeleteFoodPage extends StatelessWidget {
-  const DeleteFoodPage({Key? key}) : super(key: key);
+class DeleteFoodSecondPage extends StatelessWidget {
+  int index;
+  DeleteFoodSecondPage({Key? key, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: UserAddImage.foods.length,
-        itemBuilder: (ctx, index) {
+        itemCount: UserAddImage.foods[index]["foods"].length,
+        itemBuilder: (ctx, i) {
           return Container(
             margin: PMConst.kMediumPM,
             height: MediaQuery.of(context).size.height * 0.15,
@@ -33,13 +34,13 @@ class DeleteFoodPage extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: CachedNetworkImageProvider(
-                        UserAddImage.foods[index]["category_photo"],
+                        UserAddImage.foods[index]["foods"][i]["food_photo"],
                       ),
                     ),
                   ),
                 ),
                 Text(
-                  UserAddImage.foods[index]["category_name"],
+                  UserAddImage.foods[index]["foods"][i]["food_name"],
                   style: const TextStyle(fontSize: FontConst.kMediumFont + 3),
                 ),
                 Expanded(
@@ -47,11 +48,13 @@ class DeleteFoodPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/delete_food_sc",
-                              arguments: index);
+                        onPressed: () async {
+                          (UserAddImage.foods[index]["foods"] as List)
+                              .removeAt(i);
+                          await UserAddImage.writeToDbSC();
+                          Navigator.pushNamed(context, "/admin",);
                         },
-                        icon: const Icon(Icons.chevron_right),
+                        icon: const Icon(Icons.delete_outline),
                       ),
                     ],
                   ),
