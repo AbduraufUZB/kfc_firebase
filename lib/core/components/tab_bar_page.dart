@@ -4,6 +4,7 @@ import 'package:kfcapp/screens/user/bag/bag_page.dart';
 import 'package:kfcapp/screens/user/history/history_page.dart';
 import 'package:kfcapp/screens/user/home/home_page.dart';
 import 'package:kfcapp/screens/user/profile/profile_page.dart';
+import 'package:kfcapp/service/firestorage_service.dart';
 import 'package:kfcapp/service/user_bag_service.dart';
 
 class TabBarPage extends StatefulWidget {
@@ -20,20 +21,36 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     UserBagService.writeToList();
+
     _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          const HomePage(),
-          const BagPage(),
-          const HistoryPage(),
-          ProfilePage(),
-        ],
+      body: FutureBuilder(
+        future: UserAddImage.getList(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text("No Internet Bro"),
+            );
+          } else {
+            return TabBarView(
+              controller: _tabController,
+              children: [
+                const HomePage(),
+                const BagPage(),
+                const HistoryPage(),
+                ProfilePage(),
+              ],
+            );
+          }
+        },
       ),
       bottomNavigationBar: tabBarim,
     );

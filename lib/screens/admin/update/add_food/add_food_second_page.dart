@@ -1,16 +1,13 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kfcapp/core/constants/color_const.dart';
 import 'package:kfcapp/core/constants/font_const.dart';
 import 'package:kfcapp/core/constants/pm_const.dart';
 import 'package:kfcapp/core/constants/radius_const.dart';
-import 'package:kfcapp/provider/set_state_provider.dart';
 import 'package:kfcapp/service/firestorage_service.dart';
 import 'package:kfcapp/widgets/my_messenger.dart';
 import 'package:kfcapp/widgets/showalertdialog_widget.dart';
-import 'package:provider/provider.dart';
 
 class AddFoodScPage extends StatefulWidget {
   int index_current;

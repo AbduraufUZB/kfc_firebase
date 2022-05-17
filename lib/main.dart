@@ -7,6 +7,7 @@ import 'package:kfcapp/routes/my_routes.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: MyRoute.instance.onGenerateRoute,
-      initialRoute: "/splash",
+     onGenerateRoute: MyRoute.instance.onGenerateRoute,
+     initialRoute: "/splash",
     );
   }
 }

@@ -73,6 +73,6 @@ class UserAddImage {
   //Listga firebasedan kelayotgan listni tenglashtirish
   static Future getList() async {
     var data = await FireService.store.doc("/foods/category").get();
-    UserAddImage.foods = data["category"];
+    foods = data["category"];
   }
 }
